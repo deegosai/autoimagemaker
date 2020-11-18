@@ -1,0 +1,172 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Manage Plan Theme/Image{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+  <!--data table-->
+  <link rel="stylesheet" href="{% get_static_prefix %}js/data-tables/DT_bootstrap.css" />
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Manage Plan Theme/Image
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Plan Theme/Image</a>
+                </li>
+                <li class="active"> Manage Plan Theme/Image </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div {% if message.tags %} class="alert alert-block alert-{{message.tags}} fade in" {% endif %}>
+
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+
+            {{message}}
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+ 
+            <div class="row">
+                <div class="col-sm-12">
+                <section class="panel panel-success">
+                <header class="panel-heading">
+                    Manage Plan Theme/Image
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                        {% comment %} <a href="javascript:;" class="fa fa-times"></a> {% endcomment %}
+                     </span>
+                </header>
+                <div class="panel-body">
+                <div class="adv-table editable-table ">
+                <div class="clearfix">
+                    <div class="btn-group">
+                    <a href="{% url 'addpi' %}"><button type="button" style="border-radius:25px 25px 25px 25px;margin-bottom:10px;" class="btn btn btn-success">
+                            Add Plan Theme/Image <i class="fa fa-plus"></i>
+                        </button></a>
+                    </div>
+                </div>
+                <div class="space15"></div>
+                <div style="overflow-x:auto;">
+                <table class="table table-striped table-hover table-bordered " id="editable-sample">
+
+
+                <thead>
+
+                <tr>
+                    <th>PIID</th>
+                    {% comment %} <th>USER ACTIVE PLAN</th> {% endcomment %}
+                    <th>PLAN THEME/IMAGE</th>
+                    <th>PLAN NAME</th>
+                    {% comment %} <th>X-ANGLE LOGO</th>
+                    <th>Y-ANGLE LOGO</th>
+                    <th>X-ANGLE TEXT</th>
+                    <th>Y-ANGLE TEXT</th>
+                    <th>X-ANGLE EMAIL</th>
+                    <th>Y-ANGLE EMAIL</th>
+                    <th>X-ANGLE CONTACT</th>
+                    <th>Y-ANGLE CONTACT</th>
+                    <th>X-ANGLE WEBSITE</th>
+                    <th>Y-ANGLE WEBSITE</th> {% endcomment %}
+                    <th>CREATED_DATE</th>
+                    <th>UPDATED_DATE</th>
+                    {% comment %} <th>STATUS</th> {% endcomment %}
+                    <th>ACTION</th>
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for pi1 in pi %}
+
+                <tr class="">
+
+                    {% comment %} <td>{{pi1.id}}</td> {% endcomment %}
+                    <td>{{forloop.counter}}</td>
+                    {% comment %} <td>{{pi1.sbc_id.sub_id.sub_id}} - {{pi1.sbc_id.cli_id.com_name}} :- **ACTIVE PLAN** :- {{pi1.sbc_id.sub_name}}</td> {% endcomment %}
+                    <td><a href="{{pi1.final_image.url}}" target="_blank"> <img src="{{pi1.final_image.url}}" class="img-responsive img-rounded" style="height:60px; width:60px;"></a></td>
+                    <td>{{pi1.sub_id.sub_name}}</td>
+                    <td>{{pi1.created_date}}</td>
+                    <td>{{pi1.updated_date}}</td>
+                    {% comment %} <td>{{pi1.status}}</td> {% endcomment %}
+                    <td>
+                    
+                        <a href="{% url 'edtpi' pi1.id %}" hidden>
+                        <button type="button" style="border-radius:25px 25px 25px 25px;" class="btn btn-sm btn-success"><i class="fa fa-edit"></i> EDIT </button>
+                        </a> 
+
+                        <a href="{% url 'delpi' pi1.id %}">
+                        <button type="button" onclick="confirm('Are You Sure To Delete Plan Theme/Image?')" style="border-radius:25px 25px 25px 25px;" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> DELETE </button>
+                        </a>
+                        <a href="{% url 'planusers' bgid=pi1.id %}" >
+                        <button type="button" style="border-radius:25px 25px 25px 25px;" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> USERS FOR THE PLAN </button>
+                        </a> 
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+                </table>
+                </div>
+                </div>
+                </div>
+                </section>
+                </div>
+            </div>
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--data table-->
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/DT_bootstrap.js"></script>
+
+<!--script for editable table-->
+<script src="{% get_static_prefix %}js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
+{% endblock js %}

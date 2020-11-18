@@ -1,0 +1,124 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+<!-- title -->
+{% block title %}{{block.super}}Add Plan Theme/Image{% endblock title %}
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+  <!--data table-->
+  <link rel="stylesheet" href="{% get_static_prefix %}js/data-tables/DT_bootstrap.css" />
+        #myImgId{
+            border: 1px solid black;
+        }
+
+{% endblock css %}
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Add Plan Theme/Image
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Plan Theme/Image</a>
+                </li>
+                <li class="active"> Add Plan Theme/Image </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+<div class="page-heading">
+            <h3>
+                Preview Image
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Plan Theme/Image</a>
+                </li>
+                <li class="active">  Preview Image </li>
+            </ul>
+        </div>
+<!-- content -->
+{% block content %}
+
+    <section class="panel panel-success">
+      <header class="panel-heading">
+        Image Preview
+        <span class="tools pull-right">
+          <a href="javascript:;" class="fa fa-chevron-down"></a>
+          {% comment %} <a href="javascript:;" class="fa fa-times"></a> {% endcomment %}
+       </span>
+      </header>
+       <div class="space15"></div>
+          <div style="overflow-x:auto;">
+          <br>
+          <div class="col-lg-12 col-md-12" >         
+            <center>
+            <a href="{% url 'generateimages' background.pk %}"><button type="submit" style="border-radius:25px 25px 25px 25px; text-align:center;" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Proceed With The Image</button></a>
+            <a href="{% url 'editpreview' background.pk %}"><button type="reset" style="border-radius:25px 25px 25px 25px" class="btn btn-lg btn-danger"><i class="fa fa-eraser"></i> Edit Image</button></a>
+            <br>
+          </div>
+      {% comment %} <a href="{% url 'generateimages' background.pk %}"> <button>Proceed With The Image</button><br></a>
+      <a href="{% url 'editpreview' background.pk %}"> <button>Edit Image</button><br></a> {% endcomment %}
+    <br><img style="margin-top:10px;" src="{{background.final_image.url}}">
+    <br>
+          <br>
+
+    </div>
+    </div>
+    </section>
+  {% endblock content %}
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--ios7-->
+<script src="{% get_static_prefix %}js/ios-switch/switchery.js" ></script>
+<script src="{% get_static_prefix %}js/ios-switch/ios-init.js" ></script>
+
+<!--icheck -->
+<script src="{% get_static_prefix %}js/iCheck/jquery.icheck.js"></script>
+<script src="{% get_static_prefix %}js/icheck-init.js"></script>
+
+<!--multi-select-->
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+<script src="{% get_static_prefix %}js/multi-select-init.js"></script>
+
+<!--spinner-->
+<script type="text/javascript" src="{% get_static_prefix %}js/fuelux/js/spinner.min.js"></script>
+<script src="{% get_static_prefix %}js/spinner-init.js"></script>
+
+<!--file upload-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-fileupload.min.js"></script>
+
+<!--bootstrap input mask-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/fabric.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/code_snippet.min.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/color_picker.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/filesaver.min.js"></script>
+
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/dist/tui-image-editor.js"></script>
+        <script src="{% get_static_prefix %}tuic/js/service-basic.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  
+    {% comment %} <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> {% endcomment %}
+
+
+
+{% endblock js %}

@@ -1,0 +1,141 @@
+{% load static %}
+    
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="{% url 'dash' %}"><img src="{% get_static_prefix %}images/logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="{% url 'dash' %}"><img src="{% get_static_prefix %}images/logo_icon.png" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="{% get_static_prefix %}images/photos/admin1.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a style="text-decoration: none;">{{name}}</a></h4>
+                        <span>Administrator</span>
+                    </div>
+                </div>
+
+                <h5 class="left-nav-title">Account Information</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li><a href="{% url 'pro' %}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    {% comment %} <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li> {% endcomment %}
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> <span>Log Out</span></a></li>
+                </ul>
+            </div>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+
+                <li class="active"><a href="{% url 'dash' %}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>Client</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addcli' %}"> Add Client</a></li>
+                        <li><a href="{% url 'mancli' %}"> Manage Client</a></li>
+                        
+                    </ul>
+                </li>
+
+                {% comment %} <li class="menu-list"><a href=""><i class="fa fa-file-image-o"></i> <span>Client Gallery</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addclig' %}"> Add Client Gallery</a></li>
+                        <li><a href="{% url 'manclig' %}"> Manage Client Gallery</a></li>
+                        
+                    </ul>
+                </li> {% endcomment %}
+
+                {% comment %} <li class="menu-list"><a href=""><i class="fa fa-building"></i> <span>Company</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addcom' %}"> Add Company</a></li>
+                        <li><a href="{% url 'mancom' %}"> Manage Company</a></li>
+                        
+                    </ul>
+                </li> {% endcomment %}
+
+                {% comment %} <li class="menu-list"><a href=""><i class="fa fa-paint-brush"></i> <span>Theme</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'creth' %}"> Create Theme</a></li>
+                        <li><a href="{% url 'manth' %}"> Manage Theme</a></li>
+                        
+                    </ul>
+                </li> {% endcomment %}
+
+                {% comment %} <li class="menu-list"><a href=""><i class="fa fa-list"></i> <span>Category</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addcat' %}"> Add Category</a></li>
+                        <li><a href="{% url 'mancat' %}"> Manage Category</a></li>
+                        
+                    </ul>
+                </li> {% endcomment %}
+
+                {% comment %} <li class="menu-list"><a href=""><i class="fa fa-picture-o"></i> <span>Category Theme</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addci' %}"> Add Category Theme</a></li>
+                        <li><a href="{% url 'manci' %}"> Manage Category Theme</a></li>
+                        
+                    </ul>
+                </li> {% endcomment %}
+
+                {% comment %} <li><a href="{% url 'creth' %}"><i class="fa fa-paint-brush"></i> <span>Create Blank Theme</span></a></li> {% endcomment %}
+
+                {% comment %} <li class="menu-list"><a href=""><i class="fa fa-bullhorn"></i> <span>Home Post</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addhp' %}"> Add Home Post</a></li>
+                        <li><a href="{% url 'manhp' %}"> Manage Home Post</a></li>
+                        
+                    </ul>
+                </li> {% endcomment %}
+
+                <li class="menu-list"><a href=""><i class="fa fa-picture-o"></i> <span>Plan Theme</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addpi' %}" > Add Plan Theme</a></li>
+                        <li><a href="{% url 'manpi' %}"> Manage Plan Theme</a></li>
+                        
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-usd"></i> <span>Subcription</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addsub' %}"> Add Subcription</a></li>
+                        <li><a href="{% url 'mansub' %}"> Manage Subcription</a></li>
+                        
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-id-badge"></i> <span>Subcriper</span></a>
+                    <ul class="sub-menu-list">
+
+                        <li><a href="{% url 'addspr' %}"> Add Subcriper</a></li>
+                        <li><a href="{% url 'manspr' %}"> Manage Subcriper</a></li>
+                        
+                    </ul>
+                </li>
+
+                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> <span>Log Out</span></a></li>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->

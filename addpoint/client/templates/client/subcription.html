@@ -1,0 +1,106 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Subcription Plan{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+  <!--data table-->
+  <link rel="stylesheet" href="{% get_static_prefix %}js/data-tables/DT_bootstrap.css" />
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Subcription Plan
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Client</a>
+                </li>
+                <li class="active"> Subcription Plan </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+ 
+            {% comment %} <div class="row">
+                <div class="col-sm-12">
+                <section class="panel panel-success">
+                <header class="panel-heading">
+                    Subcription Plan
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                     </span>
+                </header>
+                <div class="panel-body">
+
+                {% if sub %}
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-6" style="text-align:left;">Subscription Name : </div><div class="col-sm-6" style="text-align:right; color:#d9534f;"><b><i class="fa fa-diamond" aria-hidden="true"></i>&nbsp;{{sub.sub_id.sub_name}}</b></div>
+                    </div>
+
+                    <div class="col-sm-12"><hr></div>
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-6" style="text-align:left;">Price : </div><div class="col-sm-6" style="text-align:right; color:#d9534f;"><b><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{sub.sub_id.final_price}} /-</b></div>
+                    </div>
+
+                    <div class="col-sm-12"><hr></div>
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-6" style="text-align:left;">Plan : </div><div class="col-sm-6" style="text-align:right; color:#d9534f;"><b><i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;{{sub.sub_id.sub_month}} /Month</b></div>
+                    </div>
+
+                {% else %}
+
+                    <div class="col-sm-12">
+                        <center><h3 style="color:red;"><i class="fa fa-frown-o" aria-hidden="true"></i> &nbsp; {{sub1}} &nbsp; <i class="fa fa-frown-o" aria-hidden="true"></i></h3></center>
+                    </div>
+
+                {% endif %}
+
+                </div>
+                </section>
+                </div>
+            </div> {% endcomment %}
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--data table-->
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/DT_bootstrap.js"></script>
+
+<!--script for editable table-->
+<script src="{% get_static_prefix %}js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
+
+{% endblock js %}

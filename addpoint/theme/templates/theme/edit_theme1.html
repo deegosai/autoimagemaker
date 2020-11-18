@@ -1,0 +1,107 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Edit Theme{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+        <link type="text/css" href="{% get_static_prefix %}tui/css/any/color_picker.css" rel="stylesheet">
+        <link type="text/css" href="{% get_static_prefix %}tui/dist/tui-image-editor.css" rel="stylesheet">
+
+        <style>
+            @import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+        </style>
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Edit Theme
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Theme</a>
+                </li>
+                <li class="active"> Edit Theme </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+
+            <div class="row">
+                <div class="col-sm-12">
+                <section class="panel panel-success">
+                <header class="panel-heading">
+                    Edit Theme
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                        {% comment %} <a href="javascript:;" class="fa fa-times"></a> {% endcomment %}
+                     </span>
+                </header>
+                <div class="panel-body"> 
+
+                    <div id="tui-image-editor-container"></div>
+
+                </div>
+                </section>
+                </div>
+            </div>
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+        <script type="text/javascript" src="{% get_static_prefix %}tui/js/any/fabric.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tui/js/any/code_snippet.min.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tui/js/any/color_picker.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tui/js/any/filesaver.min.js"></script>
+
+        <script type="text/javascript" src="{% get_static_prefix %}tui/dist/tui-image-editor.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tui/js/theme/white-theme-e.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tui/js/theme/black-theme-e.js"></script>
+        
+        <script>
+         // Image editor
+         var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
+             includeUI: {
+                //  loadImage: {
+                //      path: 'img/sampleImage2.png',
+                //      name: 'SampleImage'
+                //  },
+                 theme: blackTheme, // or whiteTheme
+                 initMenu: 'filter',
+                 menuBarPosition: 'bottom'
+             },
+             cssMaxWidth: 700,
+             cssMaxHeight: 500,
+             usageStatistics: false
+         });
+         window.onresize = function() {
+             imageEditor.ui.resizeEditor();
+         }
+        </script>
+
+{% endblock js %}

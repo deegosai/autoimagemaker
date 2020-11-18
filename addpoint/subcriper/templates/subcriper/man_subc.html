@@ -1,0 +1,176 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Manage Subcriper{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+  <!--data table-->
+  <link rel="stylesheet" href="{% get_static_prefix %}js/data-tables/DT_bootstrap.css" />
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Manage Subcriper
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Subcriper</a>
+                </li>
+                <li class="active"> Manage Subcriper </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div {% if message.tags %} class="alert alert-block alert-{{message.tags}} fade in" {% endif %}>
+
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+
+            {{message}}
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+ 
+            <div class="row">
+                <div class="col-sm-12">
+                <section class="panel panel-success">
+                <header class="panel-heading">
+                    Manage Subcriper
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                        {% comment %} <a href="javascript:;" class="fa fa-times"></a> {% endcomment %}
+                     </span>
+                </header>
+                <div class="panel-body">
+                <div class="adv-table editable-table ">
+                <div class="clearfix">
+                    <div class="btn-group">
+                    <a href="{% url 'addspr' %}"><button type="button" style="border-radius:25px 25px 25px 25px" class="btn btn btn-success">
+                            Add Subcriper <i class="fa fa-plus"></i>
+                        </button></a>
+                    </div>
+                    {% comment %} <div class="btn-group pull-right" hidden>
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu pull-right" >
+                            <li><a href="#">Print</a></li>
+                            <li><a href="#">Save as PDF</a></li>
+                            <li><a href="#">Export to Excel</a></li>
+                        </ul>
+                    </div> {% endcomment %}
+                </div>
+                <div class="space15"></div>
+                <div style="overflow-x:auto;">
+                <table class="table table-striped table-hover table-bordered" id="editable-sample">
+
+
+                <thead>
+
+                <tr>
+                    <th>SPRID</th>
+                    <th>CLIENT ID</th>
+                    <th>SUBCRIPTION ID</th>
+                    <th>SUBCRIPTION COUNT</th>
+                    <th>PLAN_START_DATE</th>
+                    <th>PLAN_END_DATE</th>
+                    <th>CREATED_DATE</th>
+                    <th>UPDATED_DATE</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for spr1 in spr %}
+
+                <tr class="">
+
+                    {% comment %} <td>{{spr1.sbc_id}}</td> {% endcomment %}
+                    <td>{{forloop.counter}}</td>
+                    <td>{{spr1.cli_id.cli_id}} - {{spr1.cli_id.cli_fname}} {{spr1.cli_id.cli_lname}}  - {{spr1.cli_id.com_name}}</td>
+                    <td>{{spr1.sub_id.sub_id}} - {{spr1.sub_id.sub_name}} - {{spr1.sub_id.final_price}}</td>
+                    <td>{{spr1.image_count}} </td>
+                    <td>{{spr1.start_date}}</td>
+                    <td>{{spr1.end_date}}</td>
+                    <td>{{spr1.created_date}}</td>
+                    <td>{{spr1.updated_date}}</td>
+                    <td>{{spr1.status}}</td>
+                    <td>
+                    
+                        <a href="{% url 'edtspr' spr1.sbc_id %}">
+                        <button type="button" style="border-radius:25px 25px 25px 25px;" class="btn btn-sm btn-success"><i class="fa fa-edit"></i> EDIT </button>
+                        </a> |
+
+                        <a href="{% url 'delspr' spr1.sbc_id %}">
+                        <button type="button" style="border-radius:25px 25px 25px 25px;" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> DELETE </button>
+                        </a>
+                    
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+
+                </table>
+                </div>
+                </div>
+                </div>
+                </section>
+                </div>
+            </div>
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--data table-->
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/DT_bootstrap.js"></script>
+
+<!--script for editable table-->
+<script src="{% get_static_prefix %}js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
+
+{% endblock js %}

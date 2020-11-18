@@ -1,0 +1,175 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Manage Category{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+  <!--data table-->
+  <link rel="stylesheet" href="{% get_static_prefix %}js/data-tables/DT_bootstrap.css" />
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Manage Category
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Category</a>
+                </li>
+                <li class="active"> Manage Category </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+
+{% comment %} {% if messages %}
+    {% for message in messages %}
+        <span {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</span>
+    {% endfor %}
+{% endif %} {% endcomment %}
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div {% if message.tags %} class="alert alert-block alert-{{message.tags}} fade in" {% endif %}>
+
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+
+            {{message}}
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+ 
+            <div class="row">
+                <div class="col-sm-12">
+                <section class="panel panel-success">
+                <header class="panel-heading">
+                    Manage Category
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                        {% comment %} <a href="javascript:;" class="fa fa-times"></a> {% endcomment %}
+                     </span>
+                </header>
+                <div class="panel-body">
+                <div class="adv-table editable-table ">
+                <div class="clearfix">
+                    <div class="btn-group">
+                    <a href="{% url 'addcat' %}"><button type="button" style="border-radius:25px 25px 25px 25px" class="btn btn btn-success">
+                            Add Category <i class="fa fa-plus"></i>
+                        </button></a>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Print</a></li>
+                            <li><a href="#">Save as PDF</a></li>
+                            <li><a href="#">Export to Excel</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="space15"></div>
+                <div style="overflow-x:auto;">
+                <table class="table table-striped table-hover table-bordered" id="editable-sample">
+
+
+                <thead>
+
+                <tr>
+                    <th>CAT_ID</th>
+                    <th>THUMB</th>
+                    <th>CATEGORY</th>
+                    <th>CREATED_DATE</th>
+                    <th>UPDATED_DATE</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for cat1 in cat %}
+
+                <tr class="">
+
+                    <td>{{cat1.cat_id}}</td>
+                    <td><img src="{{cat1.cat_img.url}}" class="img-responsive img-rounded" style="height:60px; width:60px;"></td>
+                    <td>{{cat1.cat_name}}</td>
+                    <td>{{cat1.created_date}}</td>
+                    <td>{{cat1.updated_date}}</td>
+                    <td>{{cat1.status}}</td>
+                    <td>
+                    
+                        <a href="{% url 'edtcat' cat1.cat_id %}">
+                        <button type="button" style="border-radius:25px 25px 25px 25px;" class="btn btn-sm btn-success"><i class="fa fa-edit"></i> EDIT </button>
+                        </a> |
+
+                        <a href="{% url 'delcat' cat1.cat_id %}">
+                        <button type="button" style="border-radius:25px 25px 25px 25px;" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> DELETE </button>
+                        </a>
+                    
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+
+                </table>
+                </div>
+                </div>
+                </div>
+                </section>
+                </div>
+            </div>
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--data table-->
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/data-tables/DT_bootstrap.js"></script>
+
+<!--script for editable table-->
+<script src="{% get_static_prefix %}js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
+
+{% endblock js %}

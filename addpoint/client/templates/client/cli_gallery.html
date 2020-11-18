@@ -1,0 +1,107 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Client Gallery{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Client Gallery
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Client</a>
+                </li>
+                <li class="active"> Client Gallery </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+ 
+    {% comment %} <div class="row">
+        <div class="col-sm-12">
+            <section class="panel panel-success">
+                <header class="panel-heading">
+                    Client Gallery
+                    <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                        </span>
+                </header>
+                <div class="panel-body">
+
+                        <div class="col-sm-12" style="text-align:center; align:center;">
+
+                            {% if clig %}
+
+                                {% for clig1 in clig %}
+
+                                    <center><br><img src="{{clig1.clig_img.url}}" alt="" class="img-responsive" style="height:300px; width:300px; text-align:center; align:center;" /><br></center>
+
+                                {% endfor %}
+
+                            {% else %}
+
+                                <div class="col-sm-12">
+                                    <center><h3 style="color:red;"><i class="fa fa-frown-o" aria-hidden="true"></i> &nbsp; Sorry, No Any Client Gallery Image Found &nbsp; <i class="fa fa-frown-o" aria-hidden="true"></i></h3></center>
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+                </div>
+            </section>
+        </div>
+    </div> {% endcomment %}
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<script src="{% get_static_prefix %}js/jquery.isotope.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        var $container = $('#gallery');
+        $container.isotope({
+            itemSelector: '.item',
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+
+        // filter items when filter link is clicked
+        $('#filters a').click(function() {
+            var selector = $(this).attr('data-filter');
+            $container.isotope({filter: selector});
+            return false;
+        });
+    });
+</script>
+
+{% endblock js %}

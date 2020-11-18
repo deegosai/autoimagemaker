@@ -1,0 +1,190 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Admin Profile{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+    <!--ios7-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/ios-switch/switchery.css" />
+
+    <!--icheck-->
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/purple.css" rel="stylesheet">
+
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/purple.css" rel="stylesheet">
+
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/grey.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/purple.css" rel="stylesheet">
+
+    <!--multi-select-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/jquery-multi-select/css/multi-select.css" />
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/bootstrap-fileupload.min.css" />
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Admin Profile
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                {% comment %} <li>
+                    <a href="#">Admin Profile</a>
+                </li> {% endcomment %}
+                <li class="active"> Profile </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+ {% comment %} <h2 style="color:red;">{{err.ferr}}</h2>
+ <h2 style="color:green;">{{err.serr}}</h2> {% endcomment %}
+
+ {% comment %} {% if messages %}
+  {% for message in messages %}
+   <small {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</small>
+  {% endfor %}
+ {% endif %} {% endcomment %}
+
+ {% if messages %}
+
+    {% for message in messages %}
+
+        <div {% if message.tags %} class="alert alert-block alert-{{message.tags}} fade in" {% endif %}>
+
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+
+            {{message}}
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel panel-success">
+                    <header class="panel-heading">
+                        Admin Profile
+                    </header>
+                    <div class="panel-body" style="background-color: ;">
+                    {% comment %} #e4dede {% endcomment %}
+                        <div class="col-lg-12" style="text-align:center;">
+                            <h3><b><i class="fa fa-user"></i>&nbsp; Profile &nbsp;<b><i class="fa fa-user"></i></h3>
+                            <br><br>
+                        </div>
+
+                        <div class="col-lg-12" style="padding:15px; border-radius:25px; background-color: #e4dede; text-align:center;"> 
+
+                            <div class="col-lg-12">
+                                <br><b style="color:#000000;">-: Username :-<b><br><br>
+                                <p style="color:#636766;">{{name}}</p>
+                            </div>
+
+                            <div class="col-lg-12"><hr style="border-color:#000000;"></div>
+
+                            <div class="col-lg-12">
+                                <br><b style="color:#000000;">-: First Name :-<b><br><br>
+                                <p style="color:#636766;">{{fnm}}</p>
+                            </div>
+
+                            <div class="col-lg-12"><hr style="border-color:#000000;"></div>
+
+                            <div class="col-lg-12">
+                                <br><b style="color:#000000;">-: Last Name :-<b><br><br>
+                                <p style="color:#636766;">{{lnm}}</p>
+                            </div>
+
+                            <div class="col-lg-12"><hr style="border-color:#000000;"></div>
+
+                            <div class="col-lg-12">
+                                <br><b style="color:#000000;">-: Email :-<b><br><br>
+                                <p style="color:#636766;">{{em}}</p><br><br>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12"> 
+                        
+                                <br><br>    
+
+                            <center>
+                                    <a href="{% url 'edt' id %}" onclick="confirm('Are You Sure To Update Admin Profile?')"><button type="submit" style="border-radius:25px 25px 25px 25px; text-align:center;" class="btn btn-lg btn-success"><i class="fa fa-edit"></i> Edit Admin Profile</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    <a href="{% url 'cpass' %}"><button type="submit" style="border-radius:25px 25px 25px 25px; text-align:center;" class="btn btn-lg btn-warning"><i class="fa fa-key"></i> Change Password</button></a>
+                            </center>
+                            
+                                <br>
+
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--ios7-->
+<script src="{% get_static_prefix %}js/ios-switch/switchery.js" ></script>
+<script src="{% get_static_prefix %}js/ios-switch/ios-init.js" ></script>
+
+<!--icheck -->
+<script src="{% get_static_prefix %}js/iCheck/jquery.icheck.js"></script>
+<script src="{% get_static_prefix %}js/icheck-init.js"></script>
+
+<!--multi-select-->
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+<script src="{% get_static_prefix %}js/multi-select-init.js"></script>
+
+<!--spinner-->
+<script type="text/javascript" src="{% get_static_prefix %}js/fuelux/js/spinner.min.js"></script>
+<script src="{% get_static_prefix %}js/spinner-init.js"></script>
+
+<!--file upload-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-fileupload.min.js"></script>
+
+<!--bootstrap input mask-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+{% endblock js %}

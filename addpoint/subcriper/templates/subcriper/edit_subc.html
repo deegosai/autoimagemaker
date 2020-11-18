@@ -1,0 +1,228 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Edit Subcriper{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+    <!--ios7-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/ios-switch/switchery.css" />
+
+    <!--icheck-->
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/purple.css" rel="stylesheet">
+
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/purple.css" rel="stylesheet">
+
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/grey.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/purple.css" rel="stylesheet">
+
+    <!--pickers css-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+
+    <!--multi-select-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/jquery-multi-select/css/multi-select.css" />
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/bootstrap-fileupload.min.css" />
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Edit Subcriper
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Subcriper</a>
+                </li>
+                <li class="active"> Edit Subcriper </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+ <h2 style="color:red;">{{err.ferr}}</h2>
+ <h2 style="color:green;">{{err.serr}}</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel panel-success">
+                    <header class="panel-heading">
+                        Edit Subcriper
+                    </header>
+                    <div class="panel-body" style="background-color: #e4dede;">
+
+                    <form role="form" method="post" action="{% url 'updspr' espr.sbc_id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Client</label>
+                                
+                                <select class="form-control" style="border-radius:25px 25px 25px 25px;" name="cliid" required="">
+                                    <option value="none" selected disabled>--- Client ---</option>
+                                    <option value="{{espr.cli_id.cli_id}}" style="color:red; background:#0275d8;" selected>{{espr.cli_id.cli_id}} - {{espr.cli_id.cli_fname}} {{espr.cli_id.cli_lname}}  - {{espr.cli_id.com_name}}  ✔</option>
+                                {% for cli1 in cli %}
+                                    <option value="{{cli1.cli_id}}">{{cli1.cli_id}} - {{cli1.cli_fname}} {{cli1.cli_lname}}  - {{cli1.com_name}}</option>
+                                {% endfor %}
+                                </select>
+
+                            </div> 
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Subcription</label>
+                                
+                                <select class="form-control" style="border-radius:25px 25px 25px 25px;" name="subid" required="">
+                                    <option value="none" selected disabled>--- Subcription ---</option>
+                                    <option value="{{espr.sub_id.sub_id}}" style="color:red; background:#0275d8;" selected>{{espr.sub_id.sub_id}} - {{espr.sub_id.sub_name}} - {{espr.sub_id.final_price}}  ✔</option>
+                                {% for sub1 in sub %}
+                                    <option value="{{sub1.sub_id}}">{{sub1.sub_id}} - {{sub1.sub_name}} - {{sub1.final_price}}</option>
+                                {% endfor %}
+                                </select>
+
+                            </div> 
+
+                        </div>
+
+                        <div class="col-lg-12"><hr></div>
+
+                        <div class="col-lg-12" >
+
+                            <div class="form-group" >
+                                <label for="exampleInputEmail1">Plan Start Date To End Date - <b style="color:red"> (dd/mm/yyyy OR Month/Day/Year) </b> </label>
+                    
+                                    <div class="input-group input-large "  data-date-format="mm/dd/yyyy">
+
+                                        <input type="text" style="border-radius:25px 0px 0px 25px;" placeholder="Enter Plan Start Date*" value="{{espr.start_date}}" class="form-control dpd1" name="sd" required="">
+                                        <span class="input-group-addon">To</span>
+                                        <input type="text" style="border-radius:0px 25px 25px 0px;" placeholder="Enter Plan End Date*" value="{{espr.end_date}}" class="form-control dpd2" name="ed" required="">
+
+                                    </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12" >
+                            <div class="form-group" >
+                                <label for="exampleInputEmail1">Total Image : </label>
+                                <input type="number" style="border-radius:25px 0px 0px 25px;" placeholder="Enter Image Count" class="form-control" name="count" value="{{espr.image_count}}">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Status</label>
+                                
+                                <select class="form-control" style="border-radius:25px 25px 25px 25px;" name="sta" required="">
+                                    <option value="none" selected disabled>--- Status ---</option>
+                                    <option value="{{espr.status}}" style="color:red; background:#0275d8;" selected>{{espr.status}}  ✔</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Deactive">Deactive</option>
+                                </select>
+
+                            </div>  
+
+                        </div>  
+                        
+                        <div class="col-lg-12"><hr></div>
+
+                        <div class="col-lg-12"> 
+                        
+                                <br>       
+
+                            <center>
+                                    <button type="submit" style="border-radius:25px 25px 25px 25px; text-align:center;" class="btn btn-lg btn-success"><i class="fa fa-edit"></i> Update Subcriper</button>
+                            </center>
+                            
+                                <br>
+
+                        </div>
+
+                        </form>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--ios7-->
+<script src="{% get_static_prefix %}js/ios-switch/switchery.js" ></script>
+<script src="{% get_static_prefix %}js/ios-switch/ios-init.js" ></script>
+
+<!--icheck -->
+<script src="{% get_static_prefix %}js/iCheck/jquery.icheck.js"></script>
+<script src="{% get_static_prefix %}js/icheck-init.js"></script>
+
+<!--multi-select-->
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+<script src="{% get_static_prefix %}js/multi-select-init.js"></script>
+
+<!--spinner-->
+<script type="text/javascript" src="{% get_static_prefix %}js/fuelux/js/spinner.min.js"></script>
+<script src="{% get_static_prefix %}js/spinner-init.js"></script>
+
+<!--file upload-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-fileupload.min.js"></script>
+
+<!--pickers plugins-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+<!--pickers initialization-->
+<script src="{% get_static_prefix %}js/pickers-init.js"></script>
+
+<!--bootstrap input mask-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+{% endblock js %}

@@ -1,0 +1,207 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+
+
+<!-- title -->
+{% block title %}{{block.super}}Edit Subcription{% endblock title %}
+
+
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+    <!--ios7-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/ios-switch/switchery.css" />
+
+    <!--icheck-->
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/minimal/purple.css" rel="stylesheet">
+
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/square/purple.css" rel="stylesheet">
+
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/grey.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/red.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/blue.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/yellow.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}js/iCheck/skins/flat/purple.css" rel="stylesheet">
+
+    <!--multi-select-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}js/jquery-multi-select/css/multi-select.css" />
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/bootstrap-fileupload.min.css" />
+
+{% endblock css %}
+
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Edit Subcription
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Subcription</a>
+                </li>
+                <li class="active"> Edit Subcription </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+ 
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel panel-success">
+                    <header class="panel-heading">
+                        Edit Subcription
+                    </header>
+                    <div class="panel-body" style="background-color: #e4dede;">
+
+                    <form role="form" method="post" action="{% url 'updsub' sb.sub_id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Subcription Name</label>
+                                <input type="text" name="snm" value="{{sb.sub_name}}" placeholder="Enter Subcription Name*" class="form-control round-input" required="">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6" hidden>
+
+                            <div class="form-group" >
+                                <label for="exampleInputEmail1">Month</label>
+                                <input type="text" name="mon" value="{{sb.sub_month}}" placeholder="Enter Subcription Month*" class="form-control round-input" required="">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12"><hr></div>
+
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Price</label>
+                                <input type="text" name="pr" value="{{sb.sub_price}}" placeholder="Enter Subcription Price*" class="form-control round-input" required="">
+                            </div>
+
+                        </div>
+
+                        {% comment %} <div class="col-lg-4">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Discount</label>
+                                <input type="text" name="dis"  value="{{sb.discount}}" placeholder="Enter Subcription Discount*" class="form-control round-input" required="">
+                            </div>
+
+                        </div> {% endcomment %}
+
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Final Price</label>
+                                <input type="text" name="fpr" value="{{sb.final_price}}" placeholder="Enter Subcription Total/Final Price*" class="form-control round-input" required="">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12"><hr></div>
+
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Theme Provide</label>
+                                <input type="text" name="tp" value="{{sb.sub_imgcount}}" placeholder="Enter Subcription Theme Provide*" class="form-control round-input" required="">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Status</label>
+                                
+                                <select class="form-control" style="border-radius:25px 25px 25px 25px;" name="sta" required="">
+                                    <option value="none" selected disabled>--- Status ---</option>
+                                    <option value="{{sb.status}}" style="color:red; background:#0275d8;" selected>{{sb.status}}  ✔</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Deactive">Deactive</option>
+                                </select>
+
+                            </div>  
+
+                        </div>  
+                        
+                        <div class="col-lg-12"><hr></div>
+
+                        <div class="col-lg-12"> 
+                        
+                                <br>       
+
+                            <center>
+                                    <button type="submit" style="border-radius:25px 25px 25px 25px; text-align:center;" class="btn btn-lg btn-success"><i class="fa fa-edit"></i> Update Subcription</button>
+                            </center>
+                            
+                                <br>
+
+                        </div>
+
+                        </form>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+{% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--ios7-->
+<script src="{% get_static_prefix %}js/ios-switch/switchery.js" ></script>
+<script src="{% get_static_prefix %}js/ios-switch/ios-init.js" ></script>
+
+<!--icheck -->
+<script src="{% get_static_prefix %}js/iCheck/jquery.icheck.js"></script>
+<script src="{% get_static_prefix %}js/icheck-init.js"></script>
+
+<!--multi-select-->
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+<script src="{% get_static_prefix %}js/multi-select-init.js"></script>
+
+<!--spinner-->
+<script type="text/javascript" src="{% get_static_prefix %}js/fuelux/js/spinner.min.js"></script>
+<script src="{% get_static_prefix %}js/spinner-init.js"></script>
+
+<!--file upload-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-fileupload.min.js"></script>
+
+<!--bootstrap input mask-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+{% endblock js %}

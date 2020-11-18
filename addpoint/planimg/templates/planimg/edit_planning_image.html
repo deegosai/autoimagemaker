@@ -1,0 +1,306 @@
+{% extends 'core/../main.html' %}
+{% load static %}
+<!-- title -->
+{% block title %}{{block.super}}Edit Plan Theme/Image{% endblock title %}
+<!-- css -->
+{% block css %}
+{{block.super}}
+
+  <!--data table-->
+  <link rel="stylesheet" href="{% get_static_prefix %}js/data-tables/DT_bootstrap.css" />
+
+{% endblock css %}
+
+<!-- heading & breadcrump -->
+{% block heading %}
+
+        <div class="page-heading">
+            <h3>
+                Edit Plan Theme/Image
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'dash' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Plan Theme/Image</a>
+                </li>
+                <li class="active"> Edit Plan Theme/Image </li>
+            </ul>
+        </div>
+
+{% endblock heading %}
+
+
+<!-- content -->
+{% block content %}
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+        <div {% if message.tags %} class="alert alert-block alert-{{message.tags}} fade in" {% endif %}>
+
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+
+            {{message}}
+
+        </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+  <div class="row">
+    <div class="col-sm-12">
+      <section class="panel panel-success">
+      <header class="panel-heading">
+        Edit Plan Theme/Image
+        <span class="tools pull-right">
+          <a href="javascript:;" class="fa fa-chevron-down"></a>
+          {% comment %} <a href="javascript:;" class="fa fa-times"></a> {% endcomment %}
+       </span>
+      </header>
+    <div class="panel-body" style="background-color: #e4dede;">
+      <div class="adv-table editable-table ">
+        <div class="clearfix">
+          {% comment %} <div class="btn-group">
+            <a href="{% url 'addpi' %}"><button type="button" style="border-radius:25px 25px 25px 25px" class="btn btn btn-success">
+                Add Plan Theme/Image <i class="fa fa-plus"></i>
+            </button>
+            </a>
+          </div> {% endcomment %}
+        </div>
+        <div class="space15"></div>
+          <div style="overflow-x:auto;">
+           <form action="{% url 'updateplanimage' subscriber_id=background.id %}" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="col-lg-3">
+                <div class="form-group">
+                <label for="choose_supscriper" >Choose Subscription : </label>
+                  <select id="choose_supscriper" name="choose_supscriper">
+                    {% for subscriber in subcribers %}
+                    <option value="{{subscriber.pk}}"  {% if background.sub_id.sub_id == subscriber.sub_id %} selected {% endif %}>{{subscriber.sub_name}}</option>
+                    {% endfor %}
+                  </select>
+                  </div>
+              </div>
+
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label for="fileUpload">Choose Theme :</label>
+                  <input id="fileUpload" class="form-control round-input" name="planimg" accept="image/*" type="file" >
+                </div>
+              </div>
+
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label>Enter Logo Position :</label>
+                  <label for="position_logo_x">X : </label> <input type="number" value="{{background.x_logo}}" class="form-control round-input"  id="position_logo_x" name="position_logo_x" required>   
+                  <label for="position_logo_y">Y : </label> <input type="number"  value="{{background.y_logo}}" class="form-control round-input"  id="position_logo_y" name="position_logo_y" required>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="form-group">
+              <label>Enter Address Position :</label>
+                <label for="position_address_x">X : </label> <input type="number" value="{{background.x_txt}}" class="form-control round-input" id="position_address_x" name="position_address_x" required>
+                <label for="position_address_y">Y : </label> <input type="number" value="{{background.y_txt}}" class="form-control round-input" id="position_address_y" name="position_address_y" required>
+              </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="form-group">
+              <label>Enter Logo Hight :</label>
+                <label for="logo_height">Height : </label> <input type="number" value="{{background.h_logo}}"  class="form-control round-input" id="logo_height" name="logo_height" required>
+              </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="form-group">
+              <label>Enter Email Position :</label>
+                <label for="position_email_x">X : </label> <input type="number" value="{{background.x_email}}" class="form-control round-input" id="position_email_x" name="position_email_x" required>  
+                <label for="position_email_y">Y : </label> <input type="number" value="{{background.y_email}}"  class="form-control round-input" id="position_email_y" name="position_email_y" required>
+              </div>
+              </div>
+             <div class="col-lg-3">
+                <div class="form-group">
+                <label>Enter Contact Position :</label>
+                <label for="position_contact_x">X : </label> <input type="number" value="{{background.x_contact}}" class="form-control round-input" id="position_contact_x" name="position_contact_x" required>
+                <label for="position_contact_y">Y : </label> <input type="number" value="{{background.y_contact}}" class="form-control round-input" id="position_contact_y" name="position_contact_y" required>
+              </div> 
+              </div> 
+              <div class="col-lg-3">
+                <div class="form-group">
+                <label>Enter Website Position :</label>
+                <label for="position_website_x">X : </label> <input type="number" value="{{background.x_website}}" class="form-control round-input" id="position_website_x" name="position_website_x" required>
+                <label for="position_website_y">Y : </label> <input type="number" value="{{background.y_website}}" class="form-control round-input" id="position_website_y" name="position_website_y" required>
+              </div> 
+              </div> 
+              <div class="col-lg-3">
+                <div class="form-group">
+              <label for="choose_font">Choose Font : </label>
+                <select id="choose_font" required class="form-control" name="choose_font">
+                  <option value="FONT_HERSHEY_SIMPLEX" {% if background.font == 'FONT_HERSHEY_SIMPLEX' %}selected {% endif %}>FONT_HERSHEY_SIMPLEX</option>
+                  <option value="FONT_HERSHEY_PLAIN" {% if background.font == 'FONT_HERSHEY_PLAIN' %}selected {% endif %}>FONT_HERSHEY_PLAIN</option>
+                  <option value="FONT_HERSHEY_DUPLEX" {% if background.font == 'FONT_HERSHEY_DUPLEX' %}selected {% endif %}>FONT_HERSHEY_DUPLEX</option>
+                  <option value="FONT_HERSHEY_COMPLEX" {% if background.font == 'FONT_HERSHEY_COMPLEX' %}selected {% endif %}>FONT_HERSHEY_COMPLEX</option>
+                  <option value="FONT_HERSHEY_TRIPLEX" {% if background.font == 'FONT_HERSHEY_TRIPLEX' %}selected {% endif %}>FONT_HERSHEY_TRIPLEX</option>
+                  <option value="FONT_HERSHEY_COMPLEX_SMALL" {% if background.font == 'FONT_HERSHEY_COMPLEX_SMALL' %}selected {% endif %}>FONT_HERSHEY_COMPLEX_SMALL</option>
+                  <option value="FONT_HERSHEY_SCRIPT_SIMPLEX" {% if background.font == 'FONT_HERSHEY_SCRIPT_SIMPLEX' %}selected {% endif %}>FONT_HERSHEY_SCRIPT_SIMPLEX</option>
+                  <option value="FONT_HERSHEY_SCRIPT_COMPLEX" {% if background.font == 'FONT_HERSHEY_SCRIPT_COMPLEX' %}selected {% endif %}>FONT_HERSHEY_SCRIPT_COMPLEX</option>
+                </select>
+              </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="form-group">
+              <label for="choose_font_thickness">Choose Font : </label>
+                <select id="choose_font_thickness" required class="form-control" name="choose_font_thickness">
+                  {% comment %} <option> - Select Font Thickness - </option> {% endcomment %}
+                  <option value="1" {% if background.font_thickness == 1 %} selected{% endif %} >1</option>
+                  <option value="2" {% if background.font_thickness == 2 %} selected{% endif %} >2</option>
+                </select>
+              </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="form-group">
+              <label for="choose_font_size">Choose FontSize : </label>
+                <select id="choose_font_size" required class="form-control" name="choose_font_size">
+                  {% comment %} <option> - Select Font Size- </option> {% endcomment %}
+                  <option value="0.6" {% if background.font_size == 0.6 %} selected{% endif %}>8</option>
+                  <option value="0.8" {% if background.font_size == 0.8 %} selected{% endif %}>10</option>
+                  <option value="1" {% if background.font_size == 1 %} selected{% endif %}>12</option>
+                  <option value="1.2" {% if background.font_size == 1.2 %} selected{% endif %}>14</option>
+                  <option value="1.4" {% if background.font_size == 1.4 %} selected{% endif %}>16</option>
+                  <option value="1.6" {% if background.font_size == 1.6 %} selected{% endif %}>18</option>
+                  <option value="1.8" {% if background.font_size == 1.8 %} selected{% endif %}>22</option>
+                  <option value="2.0" {% if background.font_size == 2.0 %} selected{% endif %}>28</option>
+                  <option value="2.2" {% if background.font_size == 2.2 %} selected{% endif %}>32</option>
+                </select>
+              </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="form-group">
+                <label for="favcolor">Choose text color:</label>
+                <input type="color" class="form-control round-input" id="favcolor" name="favcolor" value="{{background.font_color}}">
+                {% comment %} <input type="submit" class="form-control round-input" value="Save Theme"> {% endcomment %}
+              </div>
+              <input type="hidden" name="id" value="{{background.id}}">
+          </div>
+              <div class="col-lg-12 col-md-12">         
+                <center>
+                <button type="submit" style="border-radius:25px 25px 25px 25px; text-align:center;" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Set Plan Theme</button>
+                <button type="reset" style="border-radius:25px 25px 25px 25px" class="btn btn-lg btn-danger"><i class="fa fa-eraser"></i> Clear</button>         
+              </div>
+            </form>
+            <p>X: <span id="x"></span></p>
+            <p>Y: <span id="y"></span></p>
+            <img id="myImgId" style="margin-bottom:25px;" class="my-2" alt="" src="{{background.final_image.url}}" /><br>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endblock content %}
+
+
+<!-- js -->
+{% block js %}
+{{block.super}}
+
+<!--ios7-->
+<script src="{% get_static_prefix %}js/ios-switch/switchery.js" ></script>
+<script src="{% get_static_prefix %}js/ios-switch/ios-init.js" ></script>
+
+<!--icheck -->
+<script src="{% get_static_prefix %}js/iCheck/jquery.icheck.js"></script>
+<script src="{% get_static_prefix %}js/icheck-init.js"></script>
+
+<!--multi-select-->
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+<script src="{% get_static_prefix %}js/multi-select-init.js"></script>
+
+<!--spinner-->
+<script type="text/javascript" src="{% get_static_prefix %}js/fuelux/js/spinner.min.js"></script>
+<script src="{% get_static_prefix %}js/spinner-init.js"></script>
+
+<!--file upload-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-fileupload.min.js"></script>
+
+<!--bootstrap input mask-->
+<script type="text/javascript" src="{% get_static_prefix %}js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/fabric.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/code_snippet.min.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/color_picker.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/js/any/filesaver.min.js"></script>
+
+        <script type="text/javascript" src="{% get_static_prefix %}tuic/dist/tui-image-editor.js"></script>
+        <script src="{% get_static_prefix %}tuic/js/service-basic.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  
+  <script>
+$("input").change(function(e) {
+
+    for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+        var file = e.originalEvent.srcElement.files[i];
+        
+        var img = document.getElementById("myImgId");
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+var myImg = document.getElementById("myImgId");
+myImg.onmousedown = GetCoordinates;
+
+function FindPosition(oElement)
+{
+  if(typeof( oElement.offsetParent ) != "undefined")
+  {
+    for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+    {
+      posX += oElement.offsetLeft;
+      posY += oElement.offsetTop;
+    }
+      return [ posX, posY ];
+    }
+    else
+    {
+      return [ oElement.x, oElement.y ];
+    }
+}
+
+function GetCoordinates(e)
+{
+  var PosX = 0;
+  var PosY = 0;
+  var ImgPos;
+  ImgPos = FindPosition(myImg);
+  if (!e) var e = window.event;
+  if (e.pageX || e.pageY)
+  {
+    PosX = e.pageX;
+    PosY = e.pageY;
+  }
+  else if (e.clientX || e.clientY)
+    {
+      PosX = e.clientX + document.body.scrollLeft
+        + document.documentElement.scrollLeft;
+      PosY = e.clientY + document.body.scrollTop
+        + document.documentElement.scrollTop;
+    }
+  PosX = PosX - ImgPos[0];
+  PosY = PosY - ImgPos[1];
+  document.getElementById("x").innerHTML = PosX;
+  document.getElementById("y").innerHTML = PosY;
+}
+
+  </script>
+
+{% endblock js %}

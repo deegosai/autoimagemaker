@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+  <title>{% block title %}{% include 'inc/title.html' %}{% endblock title %}</title>
+
+<!--common scripts for all pages-->
+{% block css %}
+
+    {% include 'inc/css.html' %}
+
+{% endblock css %}
+
+</head>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+
+    {% block sidebar %}
+
+        {% include 'inc/sidebar.html' %}
+
+    {% endblock sidebar %}
+
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+
+        {% block header %}
+
+            {% include 'inc/header.html' %}
+
+        {% endblock header %}
+
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        {% block heading %}
+
+        {% endblock heading %}
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            
+            {% block content %}
+ 
+            {% endblock content %}
+
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+
+        {% block footer %}
+
+            {% include 'inc/footer.html' %}
+
+        {% endblock footer %}
+
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!--common scripts for all pages-->
+{% block js %}
+
+    {% include 'inc/js.html' %}
+
+{% endblock js %}
+
+</body>
+</html>
